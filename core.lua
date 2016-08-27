@@ -65,7 +65,7 @@ local function eventHandler(self, event, ...)
 		FCF_UnDockFrame(ChatFrame3)
 		ChatFrame3:Show()
 
-		for i = 1, NUM_CHAT_WINDOWS do			
+		for i = 1, NUM_CHAT_WINDOWS do
 
 			_G["ChatFrame"..i]:ClearAllPoints()
 			_G["ChatFrame"..i]:SetMovable(true)
@@ -206,10 +206,9 @@ local function eventHandler(self, event, ...)
 			_G[cf.."EditBoxFocusRight"]:SetTexture(nil)
 			_G[cf.."EditBoxFocusMid"]:SetTexture(nil)
 
-			local _, size, flag = _G[cf..'EditBox']:GetFont()
-			_G[cf..'EditBox']:SetFont(cfg.font, size, flag)
+			_G[cf..'EditBox']:SetFont(cfg.font, 12)
 
-			_G[cf]:SetFont(cfg.font, cfg.fontSize)
+			_G[cf]:SetFont(cfg.font, 12)
 
 			_G[cf]:SetMinResize(0,0)
 			_G[cf]:SetMaxResize(0,0)
