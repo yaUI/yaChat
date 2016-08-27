@@ -1,0 +1,14 @@
+## Interface: 70000
+## Author: Nonus - https://github.com/Nonus
+## Title: |cffFA2384ya|rChat
+## Version: 1.0
+## X-Category: Chat
+## Dependencies: yaCore, yaMedia
+
+cfg.lua
+core.lua
+fading.lua
+scroll.lua
+channelreplacements.lua
+altinvite.lua
+urlcopy.lua
