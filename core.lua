@@ -1,5 +1,5 @@
 local addon, ns = ...
-local E, M = unpack(yaCore)
+local E, M = unpack(_G.yaCore)
 local cfg = ns.cfg
 local lib = ns.lib
 
@@ -59,7 +59,7 @@ frame:RegisterEvent("ADDON_LOADED")
 local function eventHandler(self, event, ...)
 	if event then
 		FCF_ResetChatWindows()
-		FCF_DockFrame(ChatFrame2)
+		FCF_UnDockFrame(ChatFrame2)
 
 		FCF_OpenNewWindow(LOOT)
 		FCF_UnDockFrame(ChatFrame3)
@@ -90,8 +90,6 @@ local function eventHandler(self, event, ...)
 			elseif i == 3 then 
 				FCF_SetWindowName(_G["ChatFrame"..i], LOOT.." / "..TRADE) 
 			end
-			
-			FCF_DockFrame(ChatFrame2)
 			
 			ChatFrame_RemoveAllMessageGroups(ChatFrame1)
 			
@@ -209,6 +207,9 @@ local function eventHandler(self, event, ...)
 			_G[cf..'EditBox']:SetFont(cfg.font, 12)
 
 			_G[cf]:SetFont(cfg.font, 12)
+			hooksecurefunc("FloatingChatFrame_Update",function(id, ...)
+				_G["ChatFrame"..id]:SetFont(cfg.font, 12)
+			end)
 
 			_G[cf]:SetMinResize(0,0)
 			_G[cf]:SetMaxResize(0,0)
@@ -242,6 +243,8 @@ local function eventHandler(self, event, ...)
 			end
 			EventFrame:SetScript("OnEvent", EventHandler);
 		end
+
+		FCF_DockFrame(ChatFrame2)
 	end
 end
 frame:SetScript("OnEvent", eventHandler); -- frame script that begins running the on event handler

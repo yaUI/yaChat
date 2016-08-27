@@ -8,7 +8,7 @@ local E, M = unpack(_G.yaCore)
 
 -- Hide Blizzard Stuff
 cfg.channelReplacement = false
-cfg.combatLogBar = true 
+cfg.combatLogBar = false 
 cfg.tabBackground = false
 
 cfg.chatWidth = 434
