@@ -16,8 +16,8 @@ ChatFrameMenuButton:HookScript("OnShow", ChatFrameMenuButton.Hide)
 ChatFrameMenuButton:Hide()
 
 --hide the friend micro button
-FriendsMicroButton:HookScript("OnShow", FriendsMicroButton.Hide)
-FriendsMicroButton:Hide()
+QuickJoinToastButton:HookScript("OnShow", QuickJoinToastButton.Hide)
+QuickJoinToastButton:Hide()
 
 --don't cut the toastframe
 BNToastFrame:SetClampedToScreen(true)
@@ -54,10 +54,8 @@ local tabs = {"Left", "Middle", "Right", "SelectedLeft", "SelectedMiddle",
 
 local frame = CreateFrame("FRAME", nil); -- Frame to respond to events
 frame:RegisterEvent("PLAYER_ENTERING_WORLD");  -- fired any time the player enters or exits the world, ie any time the player sees a loading screen
-frame:RegisterEvent("ADDON_LOADED")
 
 local function eventHandler(self, event, ...)
-	if event then
 		FCF_ResetChatWindows()
 		FCF_UnDockFrame(ChatFrame2)
 
@@ -94,6 +92,7 @@ local function eventHandler(self, event, ...)
 			ChatFrame_RemoveAllMessageGroups(ChatFrame1)
 			
 			ChatFrame_RemoveChannel(ChatFrame1, GENERAL)
+			ChatFrame_RemoveChannel(ChatFrame1, "LocalDefense")
 			ChatFrame_RemoveChannel(ChatFrame1, TRADE)
 			
 			ChatFrame_AddMessageGroup(ChatFrame1, "GUILD")
@@ -119,9 +118,13 @@ local function eventHandler(self, event, ...)
 			
 			
 			
-			ChatFrame_RemoveAllMessageGroups(ChatFrame3)	
-			
-			ChatFrame_AddChannel(ChatFrame3, GENERAL)
+			ChatFrame_RemoveAllMessageGroups(ChatFrame3)
+
+			if not IsInRaid() then
+				ChatFrame_AddChannel(ChatFrame3, GENERAL)
+			else
+				E:Print("Detected Raid group, not registering to General chat.")
+			end
 			ChatFrame_AddChannel(ChatFrame3, TRADE)
 			
 			ChatFrame_AddMessageGroup(ChatFrame3, "MONSTER_SAY")
@@ -180,7 +183,7 @@ local function eventHandler(self, event, ...)
 			local cf = 'ChatFrame'..i
 			local tex = _G[cf..'EditBox']:GetRegions()
 			
-			_G[cf..'ButtonFrame'].Show = _G[cf..'ButtonFrame'].Hide 
+			_G[cf..'ButtonFrame'].Show = _G[cf..'ButtonFrame'].Hide
 			_G[cf..'ButtonFrame']:Hide()
 			
 			_G[cf..'EditBox']:SetAltArrowKeyMode(false)
@@ -207,9 +210,11 @@ local function eventHandler(self, event, ...)
 			_G[cf..'EditBox']:SetFont(cfg.font, 12)
 
 			_G[cf]:SetFont(cfg.font, 12)
-			hooksecurefunc("FloatingChatFrame_Update",function(id, ...)
-				_G["ChatFrame"..id]:SetFont(cfg.font, 12)
-			end)
+
+			--hooksecurefunc("FloatingChatFrame_Update",function(id, ...)
+			--	_G["ChatFrame"..id]:SetFont(cfg.font, 12)
+			--end)
+			_G[cf..'EditBox']:Hide()
 
 			_G[cf]:SetMinResize(0,0)
 			_G[cf]:SetMaxResize(0,0)
@@ -245,6 +250,5 @@ local function eventHandler(self, event, ...)
 		end
 
 		FCF_DockFrame(ChatFrame2)
-	end
 end
 frame:SetScript("OnEvent", eventHandler); -- frame script that begins running the on event handler

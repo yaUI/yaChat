@@ -1,6 +1,6 @@
 local addon, ns = ...
-local cfg = CreateFrame("Frame")
 local E, M = unpack(_G.yaCore)
+local cfg = CreateFrame("Frame")
 
 -----------------
 -- CONFIG --
@@ -11,20 +11,19 @@ cfg.channelReplacement = false
 cfg.combatLogBar = false 
 cfg.tabBackground = false
 
-cfg.chatWidth = 434
+cfg.chatWidth = 374
 cfg.chatHeight = 144
 
 if IsAddOnLoaded("yaBars") then
-	cfg.chatPos = { 462, 47 }
+	cfg.chatPos = { 200, 47 }
 else
 	cfg.chatPos = { 40, 110 }
 end
-E:Print(E.Class)
-E:Print(E.Spec)
+
 if not IsAddOnLoaded("yaBars") and (E.Class == "HUNTER" or
 									E.Class == "PALADIN" or
 									E.Class == "WARLOCK" or
-								   (E.Class == "Mage" and E.Spec == 3) or
+								   (E.Class == "MAGE" and E.Spec == 3) or
 								   (E.Class == "DEATHKNIGHT" and E.Spec == 3))
 then
 	cfg.chatPos[2] = cfg.chatPos[2] + 35
