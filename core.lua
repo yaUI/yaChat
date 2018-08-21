@@ -1,7 +1,8 @@
 local addon, ns = ...
-local E, M = unpack(_G.yaCore)
+local E, M = unpack(_G.vCore)
 local cfg = ns.cfg
 local lib = ns.lib
+--------------
 
 E:SkinFrame(ChatFrame1)
 E:SkinFrame(ChatFrame3)

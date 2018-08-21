@@ -1,5 +1,8 @@
 local addon, ns = ...
 local cfg = ns.cfg
+--------------
+
+local gsub = string.gsub
 
 if cfg.channelReplacement then  
 	--guild
@@ -35,15 +38,14 @@ if cfg.channelReplacement then
 	CHAT_FLAG_DND = "[DND] "
 	CHAT_FLAG_GM = "[GM] "
 
-	local gsub = _G.string.gsub
 
-	for i = 1, NUM_CHAT_WINDOWS do
-		if ( i ~= 2 ) then
-			local f = _G["ChatFrame"..i]
-			local am = f.AddMessage
-			f.AddMessage = function(frame, text, ...)
-			return am(frame, text:gsub('|h%[(%d+)%. .-%]|h', '|h%1|h'), ...)
-			end
+for i = 1, NUM_CHAT_WINDOWS do
+	if ( i ~= 2 ) then
+		local f = _G["ChatFrame"..i]
+		local am = f.AddMessage
+		f.AddMessage = function(frame, text, ...)
+		return am(frame, text:gsub('|h%[(%d+)%. .-%]|h', '|h%1|h'), ...)
 		end
-	end 
+	end
+end
 end

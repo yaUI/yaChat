@@ -1,11 +1,8 @@
 local addon, ns = ...
 local cfg = ns.cfg
+--------------
 
 local not_selected_tab_alpha = 1
-
-------------------------------------
--- CONFIG END
------------------------------------
 
 CHAT_TAB_SHOW_DELAY = 0
 CHAT_TAB_HIDE_DELAY = 0
