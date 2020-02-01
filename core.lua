@@ -1,5 +1,5 @@
 local addon, ns = ...
-local E, M = unpack(_G.vCore)
+local E, M = unpack(_G.yaCore)
 local cfg = ns.cfg
 local lib = ns.lib
 --------------
